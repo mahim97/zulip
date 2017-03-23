@@ -119,6 +119,7 @@ var keypress_mappings = {
     113: {name: 'query_users', message_view_only: false}, // 'q'
     114: {name: 'reply_message', message_view_only: true}, // 'r'
     115: {name: 'narrow_by_recipient', message_view_only: true}, // 's'
+    117: {name: 'next_unread_topic', message_view_only: true}, // 'u'
     118: {name: 'show_lightbox', message_view_only: true}, // 'v'
     119: {name: 'query_streams', message_view_only: false}, // 'w'
 };
@@ -599,6 +600,11 @@ exports.process_hotkey = function (e, hotkey) {
         case 'open_drafts':
             drafts.toggle();
             return true;
+    }
+
+    if (event_name === "next_unread_topic") {
+        narrow.narrow_to_next_topic();
+        return true;
     }
 
     if (current_msg_list.empty()) {
